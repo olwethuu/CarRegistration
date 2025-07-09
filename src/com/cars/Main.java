@@ -1,6 +1,6 @@
 package com.cars;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 import java.time.*;
 
@@ -10,6 +10,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         ArrayList<Car> cars = new ArrayList<Car>();
+        LocalDateTime current = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
         System.out.println("Before you begin, enter your name:");
         String user = scanner.nextLine();
         System.out.println(user +", welcome to vehicle registration");
@@ -70,8 +73,10 @@ public class Main {
                 cars.add(obj);
             }
             else if(menuOption == 2){
+
+                String formatted = current.format(formatter);
                 if(cars.isEmpty()){
-                    System.out.println("There are no cars captured");
+                    System.out.println("There are no cars captured. Try again");
                 }
                 else{
                     System.out.println("************************************\n"+
@@ -85,6 +90,7 @@ public class Main {
                                 "\n PLATE NUMBER: "+carObject.getPlateNumber()+
                                 "\n MILEAGE: "+ carObject.getMileage()+
                                 "\nYEAR: "+ carObject.getYear());
+                        System.out.println("These details were captured on "+formatted);
                     }
                 }
             }
@@ -94,6 +100,6 @@ public class Main {
                     "3. Exit.");
             menuOption = scanner.nextInt();
         }
-        System.out.println("Thank you for using the app "+ user+". Till next time");
+        System.out.println("Thank you for using the app, "+ user+". Till next time");
     }
 }
